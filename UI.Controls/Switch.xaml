@@ -1,0 +1,89 @@
+﻿<UserControl
+    x:Class="UI.Controls.Switch"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"  
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    d:DesignHeight="100"
+    d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <Storyboard x:Name="KnobEnterAnimation">
+            <DoubleAnimation EnableDependentAnimation="True" Duration="0:0:0.25" 
+                             Storyboard.TargetName="KnobBackgroundRectBrush" 
+                             Storyboard.TargetProperty="(Brush.RelativeTransform).(CompositeTransform.TranslateX)" 
+                             From="-1" To="2"/>
+        </Storyboard>
+        <Storyboard x:Name="KnobExitAnimation">
+            <DoubleAnimation EnableDependentAnimation="True" Duration="0:0:0.25" 
+                             Storyboard.TargetName="KnobBackgroundRectBrush" 
+                             Storyboard.TargetProperty="(Brush.RelativeTransform).(CompositeTransform.TranslateX)" 
+                             From="2" To="-1"/>
+        </Storyboard>
+        <Storyboard x:Name="BackgroundRectReflectionAnimation">
+            <DoubleAnimation EnableDependentAnimation="True" Duration="0:0:1.5"
+                             Storyboard.TargetName="BackgroundRectReflectionBrush" 
+                             Storyboard.TargetProperty="(Brush.RelativeTransform).(CompositeTransform.TranslateX)" 
+                             From="-1" To="2"/>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <Border x:Name="Container" CornerRadius="50" PointerEntered="Container_PointerEntered">
+        <Grid Margin="0">
+            <Rectangle x:Name="BackgroundRect" Fill="#FFFF6500"/>
+            <Rectangle x:Name="BackgroundRectReflection">
+                <Rectangle.Fill>
+                    <LinearGradientBrush x:Name="BackgroundRectReflectionBrush" EndPoint="0,0.5" StartPoint="1,0.5" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad">
+                        <LinearGradientBrush.RelativeTransform>
+                            <CompositeTransform CenterY="0.5" CenterX="0.5" TranslateX="0"/>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="Transparent" Offset="0.0"/>
+                        <GradientStop Color="Transparent" Offset="0.3"/>
+                        <GradientStop Color="#3FFFFFFF" Offset="0.5"/>
+                        <GradientStop Color="Transparent" Offset="0.7"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <TextBlock x:Name="TextContainer" Height="Auto" TextAlignment="Center" HorizontalAlignment="Stretch" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Center" Margin="105,0,105,0" FontWeight="Bold" FontSize="12"/>
+
+            <Grid x:Name="Knob" HorizontalAlignment="Left" Width="100" VerticalAlignment="Stretch">
+                <Border x:Name="KnobBorder" CornerRadius="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                        Margin="0" Background="#19000000">
+                    <Border x:Name="KnobShadow" CornerRadius="45" VerticalAlignment="Stretch" 
+                            HorizontalAlignment="Stretch" Margin="5,10,5,0" Background="#3F000000"/>
+                </Border>
+
+                <Border x:Name="KnobButton" CornerRadius="45" 
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" 
+                        PointerEntered="KnobButton_PointerEntered" 
+                        PointerExited="KnobButton_PointerExited" PointerPressed="KnobButton_PointerPressed" 
+                        PointerReleased="KnobButton_PointerReleased" PointerMoved="KnobButton_PointerMoved">
+                    <Border.Triggers>
+                    </Border.Triggers>
+                    <Grid Margin="0">
+                        <Rectangle x:Name="KnobBackgroundRect" Margin="-25">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush x:Name="KnobBackgroundRectBrush" EndPoint="0.0,0.0" StartPoint="1,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <CompositeTransform x:Name="KnobCompositeTransform" CenterY="0.5" CenterX="0.5" 
+                                                            TranslateX="-1" Rotation="0"/>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FFEEE0E0"/>
+                                    <GradientStop Color="#7FFFFFFF" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>       
+</UserControl>

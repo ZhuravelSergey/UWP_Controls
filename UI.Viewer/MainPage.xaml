@@ -1,0 +1,72 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UI.Viewer"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:UI.Controls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:viewmodels="using:UI.Viewer.ViewModels"
+    xmlns:converters="using:UI.Viewer.Converters"
+    x:Class="UI.Viewer.MainPage"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <converters:DoubleToCornerRadiusConverter x:Key="DoubleToCornerRadiusConverter"/>
+    </Page.Resources>
+
+    <Page.DataContext>
+        <viewmodels:MainViewModel/>
+    </Page.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <controls:WrapPanel Grid.Row="0" Margin="25" Padding="15">
+            <CheckBox Padding="0" IsChecked="{Binding IsEditable, Mode=TwoWay}" Content="IsEditable"/>
+            <Slider Padding="5" Width="100" Value="{Binding Padding, Mode=TwoWay}" Minimum="0.005" Maximum="0.5" StepFrequency="0.05"/>
+            <Slider Padding="5" Width="100" Value="{Binding KnobBorderOpacity, Mode=TwoWay}" Minimum="0.005" Maximum="0.75" StepFrequency="0.05"/>
+            <Slider Padding="5" Width="100" Value="{Binding FontSize, Mode=TwoWay}" Minimum="6" Maximum="36" StepFrequency="1"/>
+            <Slider Padding="5" Width="100" Value="{Binding CornerRadius, Mode=TwoWay}" Minimum="0.15" Maximum="1.0" StepFrequency="0.005"/>
+            <TextBox Padding="5" Width="300" Text="{Binding Text, Mode=TwoWay}"/>
+            <CheckBox Padding="0" IsChecked="{Binding State, Mode=TwoWay, ElementName=ThirdElement}" Content="Third element"/>
+        </controls:WrapPanel>
+        <controls:UniformGrid Columns="3" Rows="3" Grid.Row="1">
+            <Custom:Switch HorizontalAlignment="Stretch" KnobPadding="{Binding Padding, Mode=TwoWay}" IsEditable="{Binding IsEditable, Mode=OneWay}"
+                           KnobBorderOpacity="{Binding KnobBorderOpacity, Mode=OneWay}" 
+                           Text="{Binding Value, Mode=OneWay, RelativeSource={RelativeSource Mode=Self}}"
+                           FontSize="{Binding FontSize, Mode=OneWay}" 
+                           CornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"
+                           KnobCornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"/>
+            <Custom:Switch HorizontalAlignment="Stretch" KnobPadding="{Binding Padding, Mode=OneWay}" IsEditable="{Binding IsEditable, Mode=OneWay}"
+                           KnobBorderOpacity="{Binding KnobBorderOpacity, Mode=OneWay}" 
+                           Text="{Binding State, Mode=OneWay, RelativeSource={RelativeSource Mode=Self}}"
+                           FontSize="{Binding FontSize, Mode=OneWay}"
+                           CornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"
+                           KnobCornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"/>
+            <Custom:Switch x:Name="ThirdElement" HorizontalAlignment="Stretch" KnobPadding="{Binding Padding, Mode=OneWay}" IsEditable="{Binding IsEditable, Mode=OneWay}"
+                           KnobBorderOpacity="{Binding KnobBorderOpacity, Mode=OneWay}" Text="{Binding Text, Mode=OneWay}"
+                           FontSize="{Binding FontSize, Mode=OneWay}"
+                           CornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"
+                           KnobCornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"/>
+            <Custom:Switch HorizontalAlignment="Stretch" KnobPadding="{Binding Padding, Mode=OneWay}" IsEditable="{Binding IsEditable, Mode=OneWay}"
+                           KnobBorderOpacity="{Binding KnobBorderOpacity, Mode=OneWay}" Text="{Binding Text, Mode=OneWay}"
+                           FontSize="{Binding FontSize, Mode=OneWay}"
+                           CornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"
+                           KnobCornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"/>
+            <Custom:Switch HorizontalAlignment="Stretch" KnobPadding="{Binding Padding, Mode=OneWay}" IsEditable="{Binding IsEditable, Mode=OneWay}"
+                           KnobBorderOpacity="{Binding KnobBorderOpacity, Mode=OneWay}" Text="{Binding Text, Mode=OneWay}"
+                           FontSize="{Binding FontSize, Mode=OneWay}"
+                           CornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"
+                           KnobCornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"/>
+            <Custom:Switch HorizontalAlignment="Stretch" KnobPadding="{Binding Padding, Mode=OneWay}" IsEditable="{Binding IsEditable, Mode=OneWay}"
+                           KnobBorderOpacity="{Binding KnobBorderOpacity, Mode=OneWay}" Text="{Binding Text, Mode=OneWay}"
+                           FontSize="{Binding FontSize, Mode=OneWay}"
+                           CornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"
+                           KnobCornerRadius="{Binding CornerRadius, Mode=OneWay, Converter={StaticResource DoubleToCornerRadiusConverter}}"/>
+        </controls:UniformGrid>
+    </Grid>
+</Page>
